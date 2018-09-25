@@ -164,94 +164,9 @@
     <div class="row">
         <div class="col-sm-7">
             <hr/>
-            <div class="review-block">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                        <div class="review-block-name"><a href="#">Student</a></div>
-                        <div class="review-block-date">January 29, 2016<br/>1 day ago</div>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="review-block-rate">
-                            <div class="clearfix"></div>
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-grey btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                        <div class="review-block-title">Course review 3</div>
-                        <div class="review-block-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</div>
-                    </div>
-                </div>
-                <hr/>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                        <div class="review-block-name"><a href="#">Student</a></div>
-                        <div class="review-block-date">January 29, 2016<br/>1 day ago</div>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="review-block-rate">
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                        <div class="review-block-title">Course review 2</div>
-                        <div class="review-block-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</div>
-                    </div>
-                </div>
-                <hr/>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
-                        <div class="review-block-name"><a href="#">Student</a></div>
-                        <div class="review-block-date">January 29, 2016<br/>1 day ago</div>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="review-block-rate">
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                        <div class="review-block-title">Course review 1</div>
-                        <div class="review-block-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley</div>
-                    </div>
-                </div>
+            <div id="review_container" class="review-block">
+                <!-- All reviews go in this block. -->
+
             </div>
         </div>
     </div>
@@ -265,7 +180,36 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 <script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/handlebars-v4.0.12.js"></script>
+<script src="js/vendor/handlebars-v4.0.12.js"></script>
+<!-- Handlebars templates -->
+<!-- TODO: Use a templating engine to automatically include all handlebars templates required for a certain page. -->
+<script id="review_item_handlebars" type="text/x-handlebars-template">
+    <div class="row" id="{{id}}">
+        <div class="col-sm-3">
+            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+            <div class="review-block-name"><a href="#">{{username}}</a></div>
+            <div class="review-block-date">
+                {{date_published}}
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="review-block-rate">
+                <span class="glyphicon glyphicon-star js_review_rating" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star js_review_rating" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star js_review_rating" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star js_review_rating" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star js_review_rating" aria-hidden="true"></span>
+            </div>
+            <div class="review-block-title">
+                {{title}}
+            </div>
+            <div class="review-block-description">
+                {{content}}
+            </div>
+        </div>
+    </div>
+</script>
+<!-- Custom scripts -->
 <script src="js/main.js"></script>
 <script src="js/load_reviews.js"></script>
 </body>
