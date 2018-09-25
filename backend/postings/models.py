@@ -5,9 +5,6 @@ class RateableEntity(models.Model):
 	# The human-readable name of this entity.
 	name = models.CharField(max_length=256)
 
-	class Meta:
-		abstract = True
-
 # A review represents any single data entry to the database.
 class Review(models.Model):
 	# An integer rating in the domain [1, 5]
@@ -19,7 +16,7 @@ class Review(models.Model):
 	# An integer representing the number of times a user found this review unhelpful.
 	unhelpful_vote_count = models.IntegerField(default=1)
 	# A foreign key referencing the entity for which this review was made.
-	rateable_entity_id = models.ForeignKey(RateableEntity, on_delete=models.CASCADE)
+	rateable_entity_id = models.ForeignKey('postings.RateableEntity', on_delete=models.CASCADE)
 
 # A RateableEntity for universities.
 class University(RateableEntity):
@@ -28,14 +25,14 @@ class University(RateableEntity):
 # A RateableEntity for professors, who belong to one or more university.
 class Professor(RateableEntity):
 	# The universities that this professor teaches or has taught at.
-	university = models.ManyToManyField(University)
+	university = models.ManyToManyField('postings.University')
 
 # A RateableEntity for courses, which belong to a university, and have one or more professors.
 class Course(RateableEntity):
 	# The university that this course belongs to.
-	university = models.ForeignKey(University, on_delete=models.CASCADE)
+	taught_at_university = models.ForeignKey('postings.University', on_delete=models.CASCADE)
 	# A list of professors that teach this course.
-	professors = models.ManyToManyField(RateableEntity)
+	professors = models.ManyToManyField('postings.Professor')
 
 # Create your models here.
 class UniversityReview(models.Model):
