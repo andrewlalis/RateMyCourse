@@ -19,7 +19,10 @@ from django.urls import re_path,path,include
 from . import views
 
 urlpatterns = [
+    # / Shows the main index page of the website.
     path('', views.index, name='index'),
+    # /universities/1/ Shows the page for a university.
+    # TODO: add pages for each rateable entity.
     path('admin/', admin.site.urls),
     re_path(r'^api/postings/', include(('postings.api.urls','postings'), namespace='api-postings')),
 ]
