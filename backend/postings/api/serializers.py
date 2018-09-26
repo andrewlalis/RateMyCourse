@@ -8,6 +8,7 @@ class UniversityReviewSerializer(serializers.ModelSerializer):
 		fields = [
 			'pk',
 			'university_name',
+			'rating',
 			'title',
 			'username',
 			'date_published',
@@ -15,5 +16,4 @@ class UniversityReviewSerializer(serializers.ModelSerializer):
 		]
 		read_only_fields =[
 			'pk',
-			'username'
 		]
