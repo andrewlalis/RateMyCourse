@@ -15,8 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import re_path,path,include
+from django.conf.urls import url
+from django.contrib.staticfiles.views import serve
+from django.views.generic import RedirectView
 
 urlpatterns = [
+    # / routes to index2.html
+    url(r'^$', serve, kwargs={'path': 'index2.html'}),
+
+    # static files (*.css, *.js, *.jpg etc.) served on /
+    # (assuming Django uses /static/ and /media/ for static/media urls)
+    url(r'^(?!/?static/)(?!/?media/)(?P<path>.*\..*)$',
+        RedirectView.as_view(url='/static/%(path)s', permanent=False)),
+
     # /universities/1/ Shows the page for a university.
     # TODO: add pages for each rateable entity.
     path('admin/', admin.site.urls),
