@@ -35,7 +35,7 @@ class University(RateableEntity):
 # A RateableEntity for professors, who belong to one or more university.
 class Professor(RateableEntity):
 	# The universities that this professor teaches or has taught at.
-	university = models.ManyToManyField('postings.University')
+	universities = models.ManyToManyField('postings.University')
 
 # A RateableEntity for courses, which belong to a university, and have one or more professors.
 class Course(RateableEntity):
