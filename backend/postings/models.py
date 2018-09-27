@@ -50,6 +50,6 @@ class UniversityReview(models.Model):
 	username = models.CharField(max_length=200)
 	rating = models.IntegerField(default=1)
 	title = models.CharField(max_length=200)
-	date_published = models.DateTimeField('date published')
+	date_published = models.DateField('date published')
 	content = models.CharField(max_length=200)
 	
