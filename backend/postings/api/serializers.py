@@ -8,6 +8,7 @@ class UniversityReviewSerializer(serializers.ModelSerializer):
 		fields = [
 			'pk',
 			'university_name',
+			'rating',
 			'title',
 			'username',
 			'date_published',
