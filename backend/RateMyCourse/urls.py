@@ -20,8 +20,8 @@ from django.contrib.staticfiles.views import serve
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    # / routes to index2.html
-    url(r'^$', serve, kwargs={'path': 'index2.html'}),
+    # / routes to index.html
+    url(r'^$', serve, kwargs={'path': 'index.html'}),
 
     # static files (*.css, *.js, *.jpg etc.) served on /
     # (assuming Django uses /static/ and /media/ for static/media urls)
