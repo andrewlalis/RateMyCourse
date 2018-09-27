@@ -34,37 +34,4 @@ $(function(){
         closeReviewBtn.hide();
 
     });
-
-    $('.starrr').on('starrr:change', function(e, value){
-        ratingsField.val(value);
-    });
-    var i;
-    for(i = 1; i<6; i++) {
-        $(".stars").append("<button value=" + i +  " id = \"star" + i +"\" type=\"button\" class=\"btn btn-default btn-grey btn-xs\" aria-label=\"Left Align\">\n" +
-            "                    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n" +
-            "                </button>");
-    }
-    $(".stars .btn").click(function(e, value) {
-        $(".starrr").attr("data-rating", this.value);
-        for (let j = 1; j <= this.value; j++) {
-            $("#star" + j).removeClass("btn-default btn-grey").addClass("btn-warning");
-        }
-        for (let g = this.value; g <= 5; g++) {
-            $("#star" + (g+1)).addClass("btn-default btn-grey").removeClass("btn-warning");
-        }
-    });
-
-
-    var d = new Date();
-
-    var month = d.getMonth()+1;
-    var day = d.getDate();
-
-    var output =
-
-        ((''+day).length<2 ? '0' : '') + day + '/' +
-        ((''+month).length<2 ? '0' : '') + month + '/' +
-        d.getFullYear();
-    $(".date").append(output);
-
 });

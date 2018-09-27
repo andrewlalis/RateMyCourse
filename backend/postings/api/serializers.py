@@ -15,8 +15,7 @@ class UniversityReviewSerializer(serializers.ModelSerializer):
 			'content',
 		]
 		read_only_fields =[
-			'pk',
-			'username'
+			'pk'
 		]
 
 # Serializes the generic Review object.
