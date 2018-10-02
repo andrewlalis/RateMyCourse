@@ -5,8 +5,14 @@ from postings.models import *
 # Create your views here.
 
 # The view for the homepage, or index.html
+# There is an optional 'search_query GET parameter, which, if provided, gives the template a 'results' variable.
 def index(request):
-	return render(request, 'postings/index.html')
+	search_query = request.GET.get('search_query', None)
+	results = None
+	if search_query:
+		results = RateableEntity.objects.filter(name__icontains=search_query)
+
+	return render(request, 'postings/index.html', {'results': results})
 
 # The view for a listing of universities.
 def universities(request):

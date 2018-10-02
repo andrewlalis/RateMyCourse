@@ -3,15 +3,27 @@
 {# The homepage for the website. #}
 
 {% block content %}
-	<p>
-		Click one of the links below to view a list of all those entities.
-	</p>
-	<ul>
-		<li>
+	{# First section for searching our database. #}
+	<section>
+		<form method="GET" action="/">
+			<input type="text" name="search_query">
+			<button type="submit">Search</button>
+		</form>
+		<nav>
 			<a href="/universities">Universities</a>
-		</li>
-		<li>
 			<a href="/courses">Courses</a>
-		</li>
-	</ul>
+		</nav>
+	</section>
+
+	{# Second section for displaying results, or whatever should be shown first. #}
+	{% if results %}
+		<section>
+			<ul>
+				{% for entity in results %}
+					<li>{{ entity.name }}</li>
+				{% endfor %}
+			</ul>
+		</section>
+	{% endif %}
+	
 {% endblock %}
