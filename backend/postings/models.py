@@ -7,6 +7,10 @@ class User(models.Model):
 	# The user's birth date.
 	birth_date = models.DateField()
 
+	# Returns the name as the string representation of the user.
+	def __str__(self):
+		return self.name
+
 # Represents any object for which reviews can be made. (Universities, Professors, etc.)
 class RateableEntity(models.Model):
 	# Constants defined for types of rateable entities.
@@ -26,6 +30,18 @@ class RateableEntity(models.Model):
 	# The type of entity this is.
 	entity_type = models.SmallIntegerField(choices=TYPE_CHOICES)
 
+	# Gets the average of all the reviews.
+	def getAverageRating(self):
+		reviews = self.review_set.select_related()
+		rating_sum = 0
+		for review in reviews:
+			rating_sum += review.rating
+		return rating_sum / reviews.count()
+
+	# Simply returns the name as the string representation.
+	def __str__(self):
+		return self.name
+
 # A review represents any single data entry to the database.
 class Review(models.Model):
 	# An integer rating in the domain [1, 5]
@@ -41,7 +57,15 @@ class Review(models.Model):
 	# The date and time at which the last modification to this review was published.
 	last_updated_date = models.DateTimeField(auto_now=True)
 	# A reference to the person who created this review.
-	author = models.ForeignKey('postings.User', on_delete=models.PROTECT)
+	author = models.ForeignKey('postings.User', on_delete=models.PROTECT, null=True, blank=True)
+
+	# Gets the total number of votes which marked this review as 'helpful'.
+	def getHelpfulVoteCount(self):
+		ReviewHelpfulVote.objects.filter(pk=self.pk, helpful=True).count()
+
+	# Gets the total number of votes which marked this review as 'unhelpful'.
+	def getUnhelpfulVoteCount(self):
+		ReviewHelpfulVote.objects.filter(pk=self.pk, helpful=False).count()
 
 # A vote for a review as either positive or negative.
 class ReviewHelpfulVote(models.Model):
@@ -49,7 +73,8 @@ class ReviewHelpfulVote(models.Model):
 	review = models.ForeignKey('postings.Review', on_delete=models.CASCADE)
 	# Whether or not the referenced review was helpful.
 	helpful = models.BooleanField()
-	# TODO: Add a reference to the user who voted. The whole purpose of a separate vote object is to track who votes for what.
+	# The user who made this vote.
+	user = models.ForeignKey('postings.User', on_delete=models.CASCADE)
 
 # A RateableEntity for universities.
 class University(RateableEntity):

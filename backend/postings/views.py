@@ -24,6 +24,7 @@ def universities(request):
 def university_entity(request, university_id):
 	try:
 		university = University.objects.get(pk=university_id)
+		university.average_rating = university.getAverageRating()
 	except University.DoesNotExist:
 		raise Http404("University does not exist")
 	return render(request, 'postings/entity_pages/university.html', {'entity': university})
