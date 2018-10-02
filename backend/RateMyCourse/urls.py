@@ -24,9 +24,6 @@ urlpatterns = [
     # / routes to index.html
     path('', views.index, name='homepage'),
 
-    # /?search_query=xxx routes to the homepage, with displaying some basic results.
-    path('<str:search_query', views.index, name='homepage'),
-
     # /universities routes to a list of universities.
     path('universities', views.universities, name='universities_list'),
 
