@@ -18,10 +18,17 @@ from django.urls import re_path,path,include
 from django.conf.urls import url
 from django.contrib.staticfiles.views import serve
 from django.views.generic import RedirectView
+from postings import views
 
 urlpatterns = [
     # / routes to index.html
-    url(r'^$', serve, kwargs={'path': 'index.html'}),
+    path('', views.index, name='homepage'),
+
+    # /universities routes to a list of universities.
+    path('universities', views.universities, name='universities_list'),
+
+    # /courses routes to a list of courses.
+    path('courses', views.courses, name='courses_list'),
 
     # static files (*.css, *.js, *.jpg etc.) served on /
     # (assuming Django uses /static/ and /media/ for static/media urls)

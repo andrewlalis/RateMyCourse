@@ -1,0 +1,12 @@
+{% extends "postings/collections/collection.html" %}
+
+{# Represents a list of university entities. #}
+
+{% block entity %}
+	<b>{{ entity.name }}</b>, University:<i> {{ entity.taught_at_university.name}}</i><br>
+	<ul>
+		{% for professor in entity.professors.all %}
+			<li>{{ professor.name }}</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

@@ -1,0 +1,23 @@
+{# This page represents the base template that all others will extend from. #}
+{# It will contain a universal navigation bar, script tags, footers, and other things needed on every page. #}
+
+<!doctype HTML>
+<html lang="en">
+<head>
+	<title>
+		{% block title %}RateMyCourse{% endblock %}</title>
+	</title>
+</head>
+
+<body>
+	<div style="width: 100%; text-align: center; background-color: gray;">
+		<h1>RateMyCourse</h1>
+	</div>
+
+	{# All of a page's content to display should be placed in here. #}
+	<div id="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+</body>
+</html>
