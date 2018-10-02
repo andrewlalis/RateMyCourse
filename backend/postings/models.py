@@ -1,9 +1,30 @@
 from django.db import models
 
+# Represents an authenticated reviewer or reader of reviews.
+class User(models.Model):
+	# A non-unique name for the user.
+	name = models.CharField(max_length=64)
+	# The user's birth date.
+	birth_date = models.DateField()
+
 # Represents any object for which reviews can be made. (Universities, Professors, etc.)
 class RateableEntity(models.Model):
+	# Constants defined for types of rateable entities.
+	UNIVERSITY = 0
+	COURSE = 1
+	PROFESSOR = 2
+	TYPE_CHOICES = (
+		(UNIVERSITY, 'University'),
+		(COURSE, 'Course'),
+		(PROFESSOR, 'Professor')
+	)
+
 	# The human-readable name of this entity.
 	name = models.CharField(max_length=256)
+	# The date and time at which this entity was created.
+	created_date = models.DateTimeField(auto_now_add=True)
+	# The type of entity this is.
+	entity_type = models.SmallIntegerField(choices=TYPE_CHOICES)
 
 # A review represents any single data entry to the database.
 class Review(models.Model):
@@ -19,6 +40,8 @@ class Review(models.Model):
 	created_date = models.DateTimeField(auto_now_add=True)
 	# The date and time at which the last modification to this review was published.
 	last_updated_date = models.DateTimeField(auto_now=True)
+	# A reference to the person who created this review.
+	author = models.ForeignKey('postings.User', on_delete=models.PROTECT)
 
 # A vote for a review as either positive or negative.
 class ReviewHelpfulVote(models.Model):
@@ -30,7 +53,10 @@ class ReviewHelpfulVote(models.Model):
 
 # A RateableEntity for universities.
 class University(RateableEntity):
-	pass
+	# A string referring to the URL of the university. Every single university should have one.
+	website_url = models.URLField()
+	# A string referring to the location of the university.
+	location = models.CharField(max_length=256)
 
 # A RateableEntity for professors, who belong to one or more university.
 class Professor(RateableEntity):
