@@ -2,11 +2,10 @@
 
 {# Represents a list of university entities. #}
 
+{% block collection_name %}
+	<h2>Courses</h2>
+{% endblock %}
+
 {% block entity %}
-	<b>{{ entity.name }}</b>, University:<i> {{ entity.taught_at_university.name}}</i><br>
-	<ul>
-		{% for professor in entity.professors.all %}
-			<li>{{ professor.name }}</li>
-		{% endfor %}
-	</ul>
+	<h3><a href="/courses/{{ entity.pk }}">{{ entity.name }}</a></h3>
 {% endblock %}

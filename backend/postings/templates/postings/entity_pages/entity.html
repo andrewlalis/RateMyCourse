@@ -1,0 +1,24 @@
+{% extends "postings/generic_page.html" %}
+
+{# Represents a single entity's detail page. #}
+
+{% block content %}
+
+<h2>Name: {{ entity.name }}</h2>
+
+{% block entity_info %}
+{% endblock %}
+
+<section>
+	<h3>Reviews</h3>
+	<ul>
+	{% for review in entity.review_set.all %}
+		<li>
+			<h4>{{ review.title }}</h4> {{ review.rating }}
+			<p>{{ review.content }}
+		</li>
+	{% endfor %}
+	</ul>
+</section>
+
+{% endblock %}

@@ -4,10 +4,14 @@
 
 {% block content %}
 
+{% block collection_name %}
+{% endblock %}
+
 <ul>
 	{% for entity in entities %}
 		<li>
 			{% block entity %}
+				{{ entity.name }}
 			{% endblock %}
 		</li>
 	{% endfor %}
