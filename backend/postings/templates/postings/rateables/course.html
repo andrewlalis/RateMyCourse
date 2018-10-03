@@ -1,7 +1,7 @@
-{% extends "postings/entity_pages/entity.html" %}
+{% extends "postings/rateables/entity.html" %}
 
 {% block entity_info %}
-	Taught at: <a href="/universities/{{ entity.taught_at_university.pk }}">{{ entity.taught_at_university.name }}</a>
+	Taught at: <a href="/rateables/{{ entity.taught_at_university.pk }}">{{ entity.taught_at_university.name }}</a>
 	<h4>Professors</h4>
 	<ul>
 		{% for professor in entity.professors.all %}

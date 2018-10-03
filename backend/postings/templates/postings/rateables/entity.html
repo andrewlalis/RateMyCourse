@@ -4,9 +4,10 @@
 
 {% block content %}
 
-<h2>Name: {{ entity.name }}</h2> Average rating: {{ entity.average_rating|floatformat:"-2" }}
+<h2>Name: {{ entity.name }} {{ entity.average }}</h2>
+<h3>Average rating: {{ entity.average_rating|floatformat:"-2" }}</h3>
 
-{# Child templates can redefine this block for displaying data pertaining to that specific entity. #}
+{# Depending on the type of entity, some detailed info is provided here. #}
 {% block entity_info %}
 {% endblock %}
 
@@ -16,8 +17,7 @@
 	<ul>
 	{% for review in entity.review_set.all %}
 		<li>
-			<h4>{{ review.title }}</h4> {{ review.rating }}
-			<p>{{ review.content }}
+			{% include "postings/rateables/review.html" with review=review only %}
 		</li>
 	{% endfor %}
 	</ul>

@@ -10,9 +10,7 @@
 <ul>
 	{% for entity in entities %}
 		<li>
-			{% block entity %}
-				{{ entity.name }}
-			{% endblock %}
+			<a href="/rateables/{{ entity.pk }}">{{ entity.name }}</a>
 		</li>
 	{% endfor %}
 </ul>
