@@ -24,6 +24,9 @@ urlpatterns = [
     # / routes to index.html
     path('', views.index, name='homepage'),
 
+    # /reviews routes to the endpoint for POSTing new reviews.
+    path('reviews', views.post_review, name='post_review'),
+
     # /universities routes to a list of universities.
     path('universities', views.universities, name='universities_list'),
 

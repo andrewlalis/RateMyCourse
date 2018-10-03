@@ -36,6 +36,8 @@ class RateableEntity(models.Model):
 		rating_sum = 0
 		for review in reviews:
 			rating_sum += review.rating
+		if reviews.count() == 0:
+			return None
 		return rating_sum / reviews.count()
 
 	# Simply returns the name as the string representation.
