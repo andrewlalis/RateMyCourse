@@ -59,7 +59,10 @@ def post_review(request):
 			title = form.cleaned_data['title']
 			content = form.cleaned_data['content']
 			entity_id = form.cleaned_data['entity_id']
-			entity = RateableEntity.objects.get(pk=entity_id)
+			try:
+				entity = RateableEntity.objects.get(pk=entity_id)
+			except RateableEntity.DoesNotExist:
+				raise HttpResponseBadRequest("Bad Request: Invalid entity id.")
 
 			# Creates the new Review object from the posted data.
 			review = Review.objects.create(
@@ -70,11 +73,6 @@ def post_review(request):
 			)
 
 			# Send the user back to the entity they were viewing.
-			redirect_path = '/'
-			if entity.entity_type == RateableEntity.UNIVERSITY:
-				redirect_path = '/universities/' + str(entity_id)
-			elif entity.entity_type == RateableEntity.COURSE:
-				redirect_path = '/courses/' + str(entity_id)
-			return HttpResponseRedirect(redirect_path)
+			return HttpResponseRedirect('/rateables/' + str(entity_id))
 
 	return HttpResponseBadRequest("Bad Request")

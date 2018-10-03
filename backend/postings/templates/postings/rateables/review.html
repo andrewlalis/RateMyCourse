@@ -1,4 +1,7 @@
 {# Template for displaying one review. #}
 
-<h4>{{ review.title }}</h4> {{ review.rating }}
+<h4>{{ review.title }}</h4>
+<i>Rating: {{ review.rating }}</i><br>
+<i>Posted on {{ review.created_date|date:"j M, Y" }}</i><br>
+
 <p>{{ review.content }}</p>
