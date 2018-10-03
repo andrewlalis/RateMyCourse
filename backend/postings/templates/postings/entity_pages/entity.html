@@ -1,0 +1,50 @@
+{% extends "postings/generic_page.html" %}
+
+{# Represents a single entity's detail page. #}
+
+{% block content %}
+
+<h2>Name: {{ entity.name }}</h2> Average rating: {{ entity.average_rating|floatformat:"-2" }}
+
+{# Child templates can redefine this block for displaying data pertaining to that specific entity. #}
+{% block entity_info %}
+{% endblock %}
+
+{# This section displays all reviews for a given entity. #}
+<section>
+	<h3>Reviews</h3>
+	<ul>
+	{% for review in entity.review_set.all %}
+		<li>
+			<h4>{{ review.title }}</h4> {{ review.rating }}
+			<p>{{ review.content }}
+		</li>
+	{% endfor %}
+	</ul>
+</section>
+
+{# This section is where the user can write a review for a particular entity and submit it. #}
+<section>
+	<h3>Write a Review</h3>
+	<form method="post" action="/reviews">
+		<label for="rating_input">Rating:</label>
+		<input id="rating_input" name="rating" type="number" step="1" min="1" max="5" required>
+		<br>
+
+		<label for="title_input">Title:</label>
+		<input id="title_input" name="title" type="text" required>
+		<br>
+
+		<label for="content_input">Content:</label>
+		<textarea id="content_input" name="content" required></textarea>
+		<br>
+
+		{# The following csrf_token and input fields are hidden values needed for form submission. #}
+		{% csrf_token %}
+		<input type="hidden" name="entity_id" value="{{ entity.pk }}">
+		
+		<button type="submit">Submit Review</button>
+	</form>
+</section>
+
+{% endblock %}
