@@ -27,17 +27,11 @@ urlpatterns = [
     # /reviews routes to the endpoint for POSTing new reviews.
     path('reviews', views.post_review, name='post_review'),
 
-    # /universities routes to a list of universities.
-    path('universities', views.universities, name='universities_list'),
+    # /rateables routes to a list of all rateable items: courses and universities.
+    path('rateables', views.rateables, name='rateables'),
 
-    # /universities/<pk> routes to a specific university.
-    path('universities/<int:university_id>', views.university_entity, name='university entity'),
-
-    # /courses routes to a list of courses.
-    path('courses', views.courses, name='courses_list'),
-
-    # /courses/<pk> routes to a specific course.
-    path('courses/<int:course_id>', views.course_entity, name='course entity'),
+    # /rateables/<pk> routes to a specific rateable entity.
+    path('rateables/<int:entity_id>', views.rateable_entity, name='rateable_entity'),
 
     # static files (*.css, *.js, *.jpg etc.) served on /
     # (assuming Django uses /static/ and /media/ for static/media urls)

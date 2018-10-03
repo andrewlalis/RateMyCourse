@@ -11,38 +11,43 @@ def index(request):
 	search_query = request.GET.get('search_query', None)
 	results = None
 	if search_query:
+		# Filter objects based on case-insensitive contains filter.
 		results = RateableEntity.objects.filter(name__icontains=search_query)
 
 	return render(request, 'postings/index.html', {'results': results})
 
-# The view for a listing of universities.
-def universities(request):
-	universities_list = University.objects.all()
-	context = {'entities': universities_list}
-	return render(request, 'postings/collections/universities.html', context)
+# The view for listing all rateable entities.
+def rateables(request):
+	entity_type = request.GET.get('type', None)
+	entities = None
+	if entity_type == "university":
+		entities = University.objects.all()
+	elif entity_type == "course":
+		entities = Course.objects.all()
+	else:
+		entities = RateableEntity.objects.all()
+	return render(request, "postings/rateables/entities.html", {'entities': entities})
 
-# The view for /universities/<pk> Displays one university entity.
-def university_entity(request, university_id):
+# The view for any rateable entity.
+def rateable_entity(request, entity_id):
 	try:
-		university = University.objects.get(pk=university_id)
-		university.average_rating = university.getAverageRating()
-	except University.DoesNotExist:
-		raise Http404("University does not exist")
-	return render(request, 'postings/entity_pages/university.html', {'entity': university})
+		entity = RateableEntity.objects.get(pk=entity_id)
 
-# The view for a listing of courses.
-def courses(request):
-	courses_list = Course.objects.all()
-	context = {'entities': courses_list}
-	return render(request, 'postings/collections/courses.html', context)
+		# Try and get a more specific entity type from what is provided.
+		if entity.entity_type == RateableEntity.UNIVERSITY:
+			entity = University.objects.get(pk=entity.pk)
+			template = "university.html"
+		elif entity.entity_type == RateableEntity.COURSE:
+			entity = Course.objects.get(pk=entity.pk)
+			template = "course.html"
 
-# The view for a specific course entity.
-def course_entity(request, course_id):
-	try:
-		course = Course.objects.get(pk=course_id)
-	except Course.DoesNotExist:
-		raise Http404("Course does not exist")
-	return render(request, 'postings/entity_pages/course.html', {'entity': course})
+		# Set any auxiliary variables needed, like average rating.
+		# This MUST be done after categorizing the object above.
+		entity.average_rating = entity.getAverageRating()
+
+	except RateableEntity.DoesNotExist:
+		raise Http404("RateableEntity with id " + str(entity_id) + " does not exist.")
+	return render(request, "postings/rateables/" + template, {'entity': entity})
 
 # The view for receiving POST requests for new reviews.
 def post_review(request):
