@@ -51,8 +51,8 @@ $(function(){
 
         // Set appropriate stars for each review
         $(".review-block-rate").each(function(){
-            let avg = parseInt($(".rating-block").attr("data-rating")).toPrecision(1);
-            if(i>avg){
+            alert($(this).attr("data-rating"));
+            if(i>$(this).attr("data-rating")){
                 $(this).append("<button value=" + i +  " id = \"star" + i +"\" type=\"button\" class=\"btn btn-default btn-grey btn-xs\" aria-label=\"Left Align\">\n" +
                     "                    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n" +
                     "                </button>");
@@ -64,7 +64,8 @@ $(function(){
         });
 
         ///Set the stars for the average
-        if(i>$(".rating-block").attr("data-rating")){
+        let avg = parseInt($(".rating-block").attr("data-rating")).toPrecision(1);
+        if(i>avg){
             $(".rating-block").append("<button value=" + i +  " id = \"star" + i +"\" type=\"button\" class=\"btn btn-default btn-grey btn-sm\" aria-label=\"Left Align\">\n" +
                 "                    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n" +
                 "                </button>");
