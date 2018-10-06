@@ -42,6 +42,8 @@ $(function(){
 
     });
 
+
+    let avg = parseFloat($(".rating-block").attr("data-rating")).toPrecision(1);
     for(let i = 1; i<6; i++) {
         // Set 5 empty stars for review which you want to write
         $(".stars").append("<button value=" + i +  " id = \"star" + i +"\" type=\"button\" class=\"btn btn-default btn-grey btn-xs\" aria-label=\"Left Align\">\n" +
@@ -51,7 +53,6 @@ $(function(){
 
         // Set appropriate stars for each review
         $(".review-block-rate").each(function(){
-            alert($(this).attr("data-rating"));
             if(i>$(this).attr("data-rating")){
                 $(this).append("<button value=" + i +  " id = \"star" + i +"\" type=\"button\" class=\"btn btn-default btn-grey btn-xs\" aria-label=\"Left Align\">\n" +
                     "                    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n" +
@@ -64,7 +65,6 @@ $(function(){
         });
 
         ///Set the stars for the average
-        let avg = parseInt($(".rating-block").attr("data-rating")).toPrecision(1);
         if(i>avg){
             $(".rating-block").append("<button value=" + i +  " id = \"star" + i +"\" type=\"button\" class=\"btn btn-default btn-grey btn-sm\" aria-label=\"Left Align\">\n" +
                 "                    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n" +

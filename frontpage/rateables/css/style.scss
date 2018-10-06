@@ -23,7 +23,9 @@
 }
 
 
-
+.navbar-brand{
+  cursor:pointer
+}
 
 //Course page
 .box2 {
@@ -120,3 +122,6 @@ h2 {
   min-width:60vw;
 }
 
+.big-font{
+  font-size:25px;
+}
