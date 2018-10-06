@@ -1,6 +1,6 @@
 //Homepage
 .box{
-  position: relative;
+  position: absolute;
   width: 100%;
   background: #5850c7 url(https://d20ohkaloyme4g.cloudfront.net/img/hero-illustration-module.png) repeat;
   color: #fff;
@@ -99,3 +99,24 @@ body {
 .nopointer{
 
 }
+
+.hr-line-dashed {
+  border-top: 1px dashed #E7EAEC;
+  color: #ffffff;
+  background-color: #ffffff;
+  height: 1px;
+  margin: 20px 0;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 100;
+}
+.block3 {
+  background: white;
+}
+
+.search-form{
+  min-width:60vw;
+}
+

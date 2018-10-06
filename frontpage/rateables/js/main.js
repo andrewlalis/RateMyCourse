@@ -37,7 +37,7 @@ $(function(){
         });
         closeReviewBtn.hide();
         for(j=1; j<=5;j++){
-            $("#star" + (j)).addClass("btn-default btn-grey").removeClass("btn-warning");
+            $(".stars #star" + (j)).addClass("btn-default btn-grey").removeClass("btn-warning");
         }
 
     });
@@ -80,9 +80,9 @@ $(function(){
         $('#rating_input').val(this.value);
         for(j=1; j<=5;j++){
             if(j>this.value){
-                $("#star" + (j)).addClass("btn-default btn-grey").removeClass("btn-warning");
+                $(".stars #star" + (j)).addClass("btn-default btn-grey").removeClass("btn-warning");
             }else{
-                $("#star" + j).removeClass("btn-default btn-grey").addClass("btn-warning");
+                $(".stars #star" + j).removeClass("btn-default btn-grey").addClass("btn-warning");
             }
         }
 

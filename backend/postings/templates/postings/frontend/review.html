@@ -1,0 +1,20 @@
+
+<!--Template for adding a review-->
+
+<hr/>
+<div class="row">
+    <div class="col-sm-3">
+        <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+        <div class="review-block-name"><a href="#">Student</a></div>
+        <div class="review-block-date">{{ review.created_date|date:"j M, Y" }}<br/></div>
+    </div>
+    <div class="col-sm-9">
+        <div class="review-block-rate" data-rating="{{ review.rating }}">
+            <div class="clearfix"></div>
+
+
+        </div>
+        <div class="review-block-title">{{ review.title }}</div>
+        <div class="review-block-description">{{ review.content }}</div>
+    </div>
+</div>
