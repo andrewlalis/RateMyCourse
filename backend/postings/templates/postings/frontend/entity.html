@@ -12,14 +12,9 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-        body {
-            padding-top: 50px;
-            padding-bottom: 20px;
-        }
-    </style>
+
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
@@ -36,19 +31,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">RateMyCourse</a>
+            <a href="./landing.html" class="navbar-brand">RateMyCourse</a>
         </div>
-        <!-- <div id="navbar" class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right" role="form">
-                <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
-            </form>
-        </div> -->
+
     </div>
 </nav>
 
@@ -57,31 +42,16 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <h1 class="muted text-center">Software engineering and startups</h1>
-            <h2 class="muted text-center">Rijksuniversiteit Groningen</h2>
+            <h1 class="muted text-center">{{ entity.name }} {{ entity.average }}</h1>
+            <h2 class="muted text-center" id="average_rating">{{ entity.average_rating|floatformat:"-2" }}</h2>
         </div>
     </div>
     <hr>
-<!--     <div class="row">
+    <div class="row">
         <div class="col-sm-3">
-            <div class="rating-block">
+            <div class="rating-block" data-rating="{{ entity.average_rating|floatformat:"-2" }}">
                 <h4>Average user rating</h4>
-                <h2 class="bold padding-bottom-7">3 <small>/ 5</small></h2>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                </button>
+                <h2 class="bold padding-bottom-7">{{ entity.average_rating|floatformat:"-2" }} <small>/ 5</small></h2>
             </div>
         </div>
         <div class="col-sm-3">
@@ -152,90 +122,76 @@
                 <div class="pull-right" style="margin-left:10px;">0</div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <div class="row">
         <div class="col-sm-7">
-            <div class="row" style="margin-top:40px;">
-                <div class="col-md-12">
-                    <div class="well-sm">
-                        <div class="text-right">
-                            <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
-                        </div>
-
-                        <div class="row" id="post-review-box" style="display:none;">
-                            <div class="col-md-12">
-                                <form id="submit_review_form" accept-charset="UTF-8">
-                                    <input id="ratings-hidden" name="rating" type="hidden">
-                                    <input id="university_name_input" name="university_name" type="hidden" value="Rijksuniversiteit Groningen">
-                                    <p id="post_review_date_display" class="text-right"></p>
-                                    <div class="form-group">
-                                        <label for="username_input">Name:</label>
-                                        <input name="username" type="text" class="form-control" placeholder="Name..." id="username_input">
-                                    </div>
-                                    <div class="form-group">
-                                    	<label for="title_input">Title:</label>
-                                    	<input id="title_input" class="form-control" placeholder="Title..." name="title">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="content_input">Review:</label>
-                                        <input id="content_input" class="form-control animated" cols="50" id="new-review" name="content" placeholder="Enter your review here..." rows="5">
-                                    </div>
-                                    <div class="form-group">
-                                    	<label for="rating_input">Rating:</label>
-                                    	<input name="rating" id="rating_input" class="form-control" type="number" min="1" max="5" step="1">
-                                    </div>
-                                    <div class="text-right">
-                                        <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
-                                            <span class="glyphicon glyphicon-remove"></span>Cancel</a>
-                                        <button id="submit_review_button" class="btn btn-success btn-lg" type="submit">Save</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <hr/>
             <div id="review_container" class="review-block">
                 <!-- All reviews go in this block. -->
+
+                <div class="row" style="margin-top:40px;">
+                    <div class="col-md-12">
+                        <div class="well-sm">
+                            <div class="text-right">
+                                <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
+                            </div>
+
+                            <div class="row" id="post-review-box" style="display:none;">
+                                <div class="col-md-12">
+
+                                    <form method="post" action="/reviews">
+                                        <p class="text-right date"></p>
+
+                                        <div class="form-group">
+                                            <label for="name_input">Name*:</label>
+                                            <input type="text" class="form-control" placeholder="(optional)Name..." id="name_input">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="title_input">Title:</label>
+                                            <input type="text" class="form-control" placeholder="Title..." id="title_input" name="title">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="content_input">Review:</label>
+                                            <textarea class="form-control animated" rows="3" id="content_input" name="content" placeholder="Enter your review here..."></textarea>
+                                        </div>
+                                        <div class="text-right">
+
+                                            <div class="stars starrr" data-rating="0"></div>
+                                            <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
+                                                <span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                                            <input type="hidden"  id="rating_input" name="rating" value="1">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="entity_id" value="{{ entity.pk }}">
+                                            <button class="btn btn-success btn-lg" type="submit">Save</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% for review in entity.review_set.all %}
+                {% include "postings/frontend/review.html" with review=review only %}
+                {% endfor %}
             </div>
+
         </div>
     </div>
+
 </div> <!-- /container -->
 
 
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 <script src="js/vendor/bootstrap.min.js"></script>
-<!-- Handlebars templates -->
-<!-- TODO: Use a templating engine to automatically include all handlebars templates required for a certain page. -->
-<script id="review_item_handlebars" type="text/x-handlebars-template">
-    <div class="row review_item" id="{{pk}}">
-        <div class="col-sm-3">
-            <div class="review-block-name"><a href="#">{{username}}</a></div>
-        </div>
-        <div class="col-sm-9">
-            <div class="review-block-rate">
-            	{{#times rating}}
-            		<span class="glyphicon glyphicon-star js_review_rating" aria-hidden="true"></span>
-            	{{/times}}
-            </div>
-            <div class="review-block-title">
-                {{title}}
-            </div>
-            <div class="review-block-description">
-                {{content}}
-            </div>
-        </div>
-    </div>
-</script>
+
 <!-- Custom scripts -->
 <script src="js/main.js"></script>
-<script src="js/load_reviews.js"></script>
-<script src="js/post_review.js"></script>
 </body>
 </html>

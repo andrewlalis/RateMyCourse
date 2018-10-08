@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseBadRequest, HttpRespo
 from postings.models import *
 from postings.forms import *
 
+
 # Create your views here.
 
 # The view for the homepage, or index.html
@@ -13,8 +14,8 @@ def index(request):
 	if search_query:
 		# Filter objects based on case-insensitive contains filter.
 		results = RateableEntity.objects.filter(name__icontains=search_query)
-
-	return render(request, 'postings/index.html', {'results': results})
+		return render(request, 'postings/frontend/results.html', {'results': results})
+	return render(request, 'postings/frontend/landing.html', {'results': results})
 
 # The view for listing all rateable entities.
 def rateables(request):
@@ -47,7 +48,8 @@ def rateable_entity(request, entity_id):
 
 	except RateableEntity.DoesNotExist:
 		raise Http404("RateableEntity with id " + str(entity_id) + " does not exist.")
-	return render(request, "postings/rateables/" + template, {'entity': entity})
+	return render(request, 'postings/frontend/entity.html', {'entity': entity})
+	# return render(request, "postings/rateables/" + template, {'entity': entity})
 
 # The view for receiving POST requests for new reviews.
 def post_review(request):
