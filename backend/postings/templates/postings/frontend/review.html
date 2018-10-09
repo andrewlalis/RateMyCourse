@@ -11,10 +11,13 @@
     <div class="col-sm-9">
         <div class="review-block-rate" data-rating="{{ review.rating }}">
             <div class="clearfix"></div>
-
-
         </div>
         <div class="review-block-title">{{ review.title }}</div>
         <div class="review-block-description">{{ review.content }}</div>
+
+        <div>
+            <span title="{{ review.getHelpfulVoteCount }} people found this review helpful">{{ review.getHelpfulVoteCount }} <span class="glyphicon glyphicon-thumbs-up"></span></span> /
+            <span title="{{ review.getUnhelpfulVoteCount }} people found this review unhelpful">{{ review.getUnhelpfulVoteCount }} <span class="glyphicon glyphicon-thumbs-down"></span></span>
+        </div>
     </div>
 </div>
