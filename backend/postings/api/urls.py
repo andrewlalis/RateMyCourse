@@ -10,6 +10,8 @@ urlpatterns = [
 	# /api/postings/reviews/1/ Returns data for one Review.
 	path('reviews/<int:pk>', ReviewView.as_view(), name='review'),
 
+	path('reviews/<int:review_id>/helpful_vote/', review_helpful_vote, name='review_helpful_vote'),
+
 	# /api/postings/universities/ Lists all university objects.
 	path('universities/', UniversitiesView.as_view(), name='universities'),
 	# /api/postings/universities/1/ Returns data for one University.

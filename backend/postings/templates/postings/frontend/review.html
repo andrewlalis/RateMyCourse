@@ -15,13 +15,14 @@
         <div class="review-block-title">{{ review.title }}</div>
         <div class="review-block-description">{{ review.content }}</div>
 
-        <div>
-            <p>Was this review helpful?
+        <div id="review-votes-{{ review.pk }}">
+            <div class="review-vote-buttons">
+                Was this review helpful?
                 <a data-review-id="{{ review.pk }}" class="btn btn-light btn-sm vote-up"><span class="glyphicon glyphicon-thumbs-up"></span> Yes</a>
                 <a data-review-id="{{ review.pk }}" class="btn btn-light btn-sm vote-down"><span class="glyphicon glyphicon-thumbs-down"></span> No</a>
-            </p>
-            <span title="{{ review.getHelpfulVoteCount }} people found this review helpful">{{ review.getHelpfulVoteCount }} <span class="glyphicon glyphicon-thumbs-up"></span></span> /
-            <span title="{{ review.getUnhelpfulVoteCount }} people found this review unhelpful">{{ review.getUnhelpfulVoteCount }} <span class="glyphicon glyphicon-thumbs-down"></span></span>
+            </div>
+            <span title="{{ review.getHelpfulVoteCount }} people found this review helpful"><span class="votes-helpful">{{ review.getHelpfulVoteCount }}</span> <span class="glyphicon glyphicon-thumbs-up"></span></span> /
+            <span title="{{ review.getUnhelpfulVoteCount }} people found this review unhelpful"><span class="votes-unhelpful">{{ review.getUnhelpfulVoteCount }}</span> <span class="glyphicon glyphicon-thumbs-down"></span></span>
         </div>
     </div>
 </div>

@@ -9,20 +9,26 @@ $(function() {
 		};
 		// Vote up
 		$.post(
-			'/api/postings/reviews/' + reviewId + '/helpful_vote',
-			data
+			'/api/postings/reviews/' + reviewId + '/helpful_vote/',
+			data,
+			function(result) { console.log(result); }
 		);
+		// Hide vote buttons
+		$("#review-votes-" + reviewId + " .review-vote-buttons").hide();
 	});
 	$(".vote-down").click(function() {
-		var review = $(this).attr("data-review-id");
+		var reviewId = $(this).attr("data-review-id");
 		var data = {
 			'csrfmiddlewaretoken': csrftoken,
 			'helpful': false
 		};
 		// Vote down
 		$.post(
-			'/api/postings/reviews/' + reviewId + '/helpful_vote',
-			data
+			'/api/postings/reviews/' + reviewId + '/helpful_vote/',
+			data,
+			function(result) { console.log(result); }
 		);
+		// Hide vote buttons
+		$("#review-votes-" + reviewId + " .review-vote-buttons").hide();
 	});
 });
