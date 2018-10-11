@@ -99,5 +99,11 @@ $(function(){
         ((''+month).length<2 ? '0' : '') + month + '/' +
         d.getFullYear();
     $(".date").append(output);
-
+    if ($('.landingpage').length > 0) {
+        $("body").addClass("box");
+    }else if ($('.results').length > 0) {
+        $("body").addClass("box3");
+    }else if ($('.entity').length > 0) {
+        $("body").addClass("box2");
+    }
 });
