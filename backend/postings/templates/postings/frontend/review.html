@@ -25,8 +25,8 @@
                 <a class="btn btn-light btn-sm js_vote_up"><span class="glyphicon glyphicon-thumbs-up"></span> Yes</a>
                 <a class="btn btn-light btn-sm js_vote_down"><span class="glyphicon glyphicon-thumbs-down"></span> No</a>
             </div>
-            <span title="{{ review.getHelpfulVoteCount }} people found this review helpful"><span class="votes-helpful">{{ review.helpful_vote_count }}</span> <span class="glyphicon glyphicon-thumbs-up"></span></span> /
-            <span title="{{ review.getUnhelpfulVoteCount }} people found this review unhelpful"><span class="votes-unhelpful">{{ review.unhelpful_vote_count }}</span> <span class="glyphicon glyphicon-thumbs-down"></span></span>
+            <span title="{{ review.helpful_vote_count }} people found this review helpful"><span id="votes_helpful_{{ review.pk }}">{{ review.helpful_vote_count }}</span> <span class="glyphicon glyphicon-thumbs-up"></span></span> /
+            <span title="{{ review.helpful_vote_count }} people found this review unhelpful"><span id="votes_unhelpful_{{ review.pk }}">{{ review.unhelpful_vote_count }}</span> <span class="glyphicon glyphicon-thumbs-down"></span></span>
         </div>
     </div>
 </div>

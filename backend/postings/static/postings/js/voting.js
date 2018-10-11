@@ -1,38 +1,3 @@
-// $(function() {
-//     var csrftoken = $("#csrf-token input").val();
-
-// 	$(".vote-up").click(function() {
-// 		var reviewId = $(this).attr("data-review-id");
-// 		var data = {
-// 			'csrfmiddlewaretoken': csrftoken,
-// 			'helpful': true
-// 		};
-// 		// Vote up
-// 		$.post(
-// 			'/api/postings/reviews/' + reviewId + '/helpful_vote/',
-// 			data,
-// 			function(result) { console.log(result); }
-// 		);
-// 		// Hide vote buttons
-// 		$("#review-votes-" + reviewId + " .review-vote-buttons").hide();
-// 	});
-// 	$(".vote-down").click(function() {
-// 		var reviewId = $(this).attr("data-review-id");
-// 		var data = {
-// 			'csrfmiddlewaretoken': csrftoken,
-// 			'helpful': false
-// 		};
-// 		// Vote down
-// 		$.post(
-// 			'/api/postings/reviews/' + reviewId + '/helpful_vote/',
-// 			data,
-// 			function(result) { console.log(result); }
-// 		);
-// 		// Hide vote buttons
-// 		$("#review-votes-" + reviewId + " .review-vote-buttons").hide();
-// 	});
-// });
-
 // Sends either an up- or down-vote for a particular review.
 function sendVote (event, is_helpful) {
 	var csrf_token = $('#csrf-token input').val();
@@ -46,7 +11,18 @@ function sendVote (event, is_helpful) {
 		data,
 	)
 		.done(function (response) {
-			console.log(response);
+			var selector = '#votes_';
+			if (is_helpful) {
+				selector += 'helpful_';
+			} else {
+				selector += 'unhelpful_';
+			}
+			var $vote_display = $(selector + review_id);
+
+			var current_votes = parseInt($vote_display.html());
+			$vote_display.html(current_votes + 1);
+
+			$('#review-votes-' + review_id + ' .review-vote-buttons').hide();
 		})
 		.fail(function (response) {
 			console.log(response);
