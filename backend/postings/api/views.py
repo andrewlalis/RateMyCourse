@@ -2,6 +2,7 @@ from rest_framework import generics, mixins
 from postings.models import *
 from .serializers import *
 from django.db.models import Q
+from django.http import *
 
 
 # The view for listing all generic Review objects.
@@ -13,13 +14,6 @@ class ReviewsView(mixins.CreateModelMixin, generics.ListAPIView):
 class ReviewView(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Review.objects.all()
 	serializer_class = ReviewSerializer
-
-class ReviewHelpfulVote(mixins.CreateModelMixin):
-	lookup_field = 'pk'
-	serializer_class = ReviewHelpfulVoteSerializer
-
-	def post(self, request, *args, **kwargs):
-		return self.create(request, *args, **kwargs)
 
 def review_helpful_vote(request, review_id):
 	if request.method == 'POST':
@@ -37,5 +31,7 @@ def review_helpful_vote(request, review_id):
 			review=review,
 			helpful=helpful
 		)
+
+		return HttpResponse(status=201)
 
 	return HttpResponseBadRequest("Bad Request")

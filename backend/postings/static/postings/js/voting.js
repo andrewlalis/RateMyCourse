@@ -33,6 +33,27 @@
 // 	});
 // });
 
+// Sends either an up- or down-vote for a particular review.
+function sendVote (event, is_helpful) {
+	var csrf_token = $('#csrf-token input').val();
+	var review_id = $(event.target).closest('.js_votes').data('review_id');
+	var data = {
+		'csrfmiddlewaretoken': csrf_token,
+		'helpful': is_helpful
+	};
+	$.post(
+		'/api/postings/reviews/' + review_id + '/helpful_vote/',
+		data,
+	)
+		.done(function (response) {
+			console.log(response);
+		})
+		.fail(function (response) {
+			console.log(response);
+		});
+}
+
+// Registers all events to the document.
 function registerEvents () {
 	$(document.body)
 	.off('click.js_vote_up')
@@ -41,6 +62,7 @@ function registerEvents () {
 		function (event) {
 			event.preventDefault();
 			console.log("updoot");
+			sendVote(event, true);
 		});
 
 	$(document.body)
@@ -50,6 +72,7 @@ function registerEvents () {
 			function (event) {
 				event.preventDefault();
 				console.log("downdoot");
+				sendVote(event, false);
 			});
 }
 

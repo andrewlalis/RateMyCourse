@@ -19,14 +19,14 @@
         <div class="review-block-title">{{ review.title }}</div>
         <div class="review-block-description">{{ review.content }}</div>
 
-        <div id="review-votes-{{ review.pk }}">
+        <div id="review-votes-{{ review.pk }}" class="js_votes" data-review_id="{{ review.pk }}">
             <div class="review-vote-buttons">
                 Was this review helpful?
-                <a data-review-id="{{ review.pk }}" class="btn btn-light btn-sm js_vote_up"><span class="glyphicon glyphicon-thumbs-up"></span> Yes</a>
-                <a data-review-id="{{ review.pk }}" class="btn btn-light btn-sm js_vote_down"><span class="glyphicon glyphicon-thumbs-down"></span> No</a>
+                <a class="btn btn-light btn-sm js_vote_up"><span class="glyphicon glyphicon-thumbs-up"></span> Yes</a>
+                <a class="btn btn-light btn-sm js_vote_down"><span class="glyphicon glyphicon-thumbs-down"></span> No</a>
             </div>
-            <span title="{{ review.getHelpfulVoteCount }} people found this review helpful"><span class="votes-helpful">{{ review.getHelpfulVoteCount }}</span> <span class="glyphicon glyphicon-thumbs-up"></span></span> /
-            <span title="{{ review.getUnhelpfulVoteCount }} people found this review unhelpful"><span class="votes-unhelpful">{{ review.getUnhelpfulVoteCount }}</span> <span class="glyphicon glyphicon-thumbs-down"></span></span>
+            <span title="{{ review.getHelpfulVoteCount }} people found this review helpful"><span class="votes-helpful">{{ review.helpful_vote_count }}</span> <span class="glyphicon glyphicon-thumbs-up"></span></span> /
+            <span title="{{ review.getUnhelpfulVoteCount }} people found this review unhelpful"><span class="votes-unhelpful">{{ review.unhelpful_vote_count }}</span> <span class="glyphicon glyphicon-thumbs-down"></span></span>
         </div>
     </div>
 </div>
