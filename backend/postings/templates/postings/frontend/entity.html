@@ -162,7 +162,7 @@
                                             <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
                                                 <span class="glyphicon glyphicon-remove"></span>Cancel</a>
                                             <input type="hidden"  id="rating_input" name="rating" value="1">
-                                            {% csrf_token %}
+                                            <div id="csrf-token">{% csrf_token %}</div>
                                             <input type="hidden" name="entity_id" value="{{ entity.pk }}">
                                             <button class="btn btn-success btn-lg" type="submit">Save</button>
                                         </div>
@@ -193,5 +193,6 @@
 
 <!-- Custom scripts -->
 <script src="js/main.js"></script>
+<script src="js/voting.js"></script>
 </body>
 </html>

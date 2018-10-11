@@ -63,11 +63,11 @@ class Review(models.Model):
 
 	# Gets the total number of votes which marked this review as 'helpful'.
 	def getHelpfulVoteCount(self):
-		ReviewHelpfulVote.objects.filter(pk=self.pk, helpful=True).count()
+		return ReviewHelpfulVote.objects.filter(pk=self.pk, helpful=True).count()
 
 	# Gets the total number of votes which marked this review as 'unhelpful'.
 	def getUnhelpfulVoteCount(self):
-		ReviewHelpfulVote.objects.filter(pk=self.pk, helpful=False).count()
+		return ReviewHelpfulVote.objects.filter(pk=self.pk, helpful=False).count()
 
 # A vote for a review as either positive or negative.
 class ReviewHelpfulVote(models.Model):
