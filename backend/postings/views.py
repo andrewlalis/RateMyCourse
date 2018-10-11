@@ -10,12 +10,16 @@ from postings.forms import *
 # There is an optional 'search_query GET parameter, which, if provided, gives the template a 'results' variable.
 def index(request):
 	search_query = request.GET.get('search_query', None)
-	results = None
+	results = []
 	if search_query:
 		# Filter objects based on case-insensitive contains filter.
 		results = RateableEntity.objects.filter(name__icontains=search_query)
-		return render(request, 'postings/frontend/results.html', {'results': results})
-	return render(request, 'postings/frontend/landing.html', {'results': results})
+		context = {
+			'results': results,
+			'search_query': search_query
+		}
+		return render(request, 'postings/frontend/results.html', context)
+	return render(request, 'postings/frontend/landing.html')
 
 # The view for listing all rateable entities.
 def rateables(request):
@@ -45,10 +49,17 @@ def rateable_entity(request, entity_id):
 		# Set any auxiliary variables needed, like average rating.
 		# This MUST be done after categorizing the object above.
 		entity.average_rating = entity.getAverageRating()
-
 	except RateableEntity.DoesNotExist:
 		raise Http404("RateableEntity with id " + str(entity_id) + " does not exist.")
-	return render(request, 'postings/frontend/entity.html', {'entity': entity})
+
+	reviews = entity.review_set.all().order_by('-created_date')
+
+	context = {
+		'entity': entity,
+		'reviews': reviews
+	}
+
+	return render(request, 'postings/frontend/entity.html', context)
 	# return render(request, "postings/rateables/" + template, {'entity': entity})
 
 # The view for receiving POST requests for new reviews.

@@ -62,12 +62,14 @@ class Review(models.Model):
 	author = models.ForeignKey('postings.User', on_delete=models.PROTECT, null=True, blank=True)
 
 	# Gets the total number of votes which marked this review as 'helpful'.
-	def getHelpfulVoteCount(self):
-		return ReviewHelpfulVote.objects.filter(pk=self.pk, helpful=True).count()
+	@property
+	def helpful_vote_count(self):
+		return ReviewHelpfulVote.objects.filter(review=self.pk, helpful=True).count()
 
 	# Gets the total number of votes which marked this review as 'unhelpful'.
-	def getUnhelpfulVoteCount(self):
-		return ReviewHelpfulVote.objects.filter(pk=self.pk, helpful=False).count()
+	@property
+	def unhelpful_vote_count(self):
+		return ReviewHelpfulVote.objects.filter(review=self.pk, helpful=False).count()
 
 # A vote for a review as either positive or negative.
 class ReviewHelpfulVote(models.Model):
@@ -75,8 +77,6 @@ class ReviewHelpfulVote(models.Model):
 	review = models.ForeignKey('postings.Review', on_delete=models.CASCADE)
 	# Whether or not the referenced review was helpful.
 	helpful = models.BooleanField()
-	# The user who made this vote.
-	user = models.ForeignKey('postings.User', on_delete=models.CASCADE)
 
 # A RateableEntity for universities.
 class University(RateableEntity):
