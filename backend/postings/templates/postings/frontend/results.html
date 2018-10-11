@@ -33,7 +33,7 @@
                             <div class="hr-line-dashed"></div>
                             <div class="search-result">
                                 <h3><a href="/rateables/{{ entity.pk }}">{{ entity.name }}</a></h3>
-                                <a href="#" class="search-link">UNIVERSITY</a>
+                                <h4> Reviews: {{entity.review_set.all|length}}</h4>
                                 <span class="toright glyphicon glyphicon-icon-comments"></span>
 
                             </div>
