@@ -1,11 +1,15 @@
-
-<!--Template for adding a review-->
+{# Template for one review. #}
 
 <hr/>
 <div class="row">
     <div class="col-sm-3">
+        {# User profile picture. #}
         <span class="big-font glyphicon glyphicon-user img-rounded"></span>
+
+        {# Username #}
         <div class="review-block-name"><a href="#">Student</a></div>
+
+        {# Date at which review was posted. #}
         <div class="review-block-date">{{ review.created_date|date:"j M, Y" }}<br/></div>
     </div>
     <div class="col-sm-9">
@@ -18,8 +22,8 @@
         <div id="review-votes-{{ review.pk }}">
             <div class="review-vote-buttons">
                 Was this review helpful?
-                <a data-review-id="{{ review.pk }}" class="btn btn-light btn-sm vote-up"><span class="glyphicon glyphicon-thumbs-up"></span> Yes</a>
-                <a data-review-id="{{ review.pk }}" class="btn btn-light btn-sm vote-down"><span class="glyphicon glyphicon-thumbs-down"></span> No</a>
+                <a data-review-id="{{ review.pk }}" class="btn btn-light btn-sm js_vote_up"><span class="glyphicon glyphicon-thumbs-up"></span> Yes</a>
+                <a data-review-id="{{ review.pk }}" class="btn btn-light btn-sm js_vote_down"><span class="glyphicon glyphicon-thumbs-down"></span> No</a>
             </div>
             <span title="{{ review.getHelpfulVoteCount }} people found this review helpful"><span class="votes-helpful">{{ review.getHelpfulVoteCount }}</span> <span class="glyphicon glyphicon-thumbs-up"></span></span> /
             <span title="{{ review.getUnhelpfulVoteCount }} people found this review unhelpful"><span class="votes-unhelpful">{{ review.getUnhelpfulVoteCount }}</span> <span class="glyphicon glyphicon-thumbs-down"></span></span>
