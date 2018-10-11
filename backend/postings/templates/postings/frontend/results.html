@@ -10,7 +10,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins ">
                 <div class="ibox-content">
-                    <h2>
+                    <h2
                         {{ results|length }} results found for: <span class="text-navy test">"{{ search_query }}"</span>
                     </h2>
 
@@ -33,7 +33,7 @@
                             <div class="hr-line-dashed"></div>
                             <div class="search-result">
                                 <h3><a href="/rateables/{{ entity.pk }}">{{ entity.name }}</a></h3>
-                                <a href="#" class="search-link">UNIVERSITY</a>
+                                <a href="#" class="search-link">{{ entity.getType }}</a>
                                 <span class="toright glyphicon glyphicon-icon-comments"></span>
 
                             </div>

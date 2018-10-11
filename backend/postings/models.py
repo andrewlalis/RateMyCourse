@@ -44,6 +44,12 @@ class RateableEntity(models.Model):
 	def __str__(self):
 		return self.name
 
+	def getType(self):
+		for (t, t_name) in RateableEntity.TYPE_CHOICES:
+			if t == self.entity_type:
+				return t_name
+		return ''
+
 # A review represents any single data entry to the database.
 class Review(models.Model):
 	# An integer rating in the domain [1, 5]
