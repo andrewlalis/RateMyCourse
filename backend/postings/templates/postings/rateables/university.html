@@ -1,0 +1,16 @@
+{% extends "postings/rateables/entity.html" %}
+
+{% block entity_info %}
+	<h4>Courses</h4>
+	<ul>
+		{% for course in entity.course_set.all %}
+			<li><a href="/rateables/{{ course.pk }}">{{ course.name }}</a></li>
+		{% endfor %}
+	</ul>
+	<h4>Professors</h4>
+	<ul>
+		{% for professor in entity.professor_set.all %}
+			<li>{{ professor.name }}</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

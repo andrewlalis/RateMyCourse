@@ -1,0 +1,50 @@
+{% extends 'postings/frontend/base_page.html' %}
+
+{% block page_title %}
+    RateMyCourse - Results
+{% endblock %}
+
+{% block content %}
+<div class="fullcontainer container bootstrap snippet results">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins ">
+                <div class="ibox-content">
+                    <h2>
+                        {{ results|length }} results found for: <span class="text-navy test">"{{ search_query }}"</span>
+                    </h2>
+
+                    <div class="search-form">
+                        <form method="GET" action="/">
+                            <div class="input-group">
+                                <input type="text" placeholder="Search" name="search_query" class="form-control input-lg">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-lg btn-primary" type="submit">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    {# Second section for displaying results, or whatever should be shown first. #}
+                    {% if results %}
+                        {% for entity in results %}
+                            <div class="hr-line-dashed"></div>
+                            <div class="search-result">
+                                <h3><a href="/rateables/{{ entity.pk }}">{{ entity.name }}</a></h3>
+                                <h4> Reviews: {{entity.review_set.all|length}}</h4>
+                                <span class="toright glyphicon glyphicon-icon-comments"></span>
+
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        No results.
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

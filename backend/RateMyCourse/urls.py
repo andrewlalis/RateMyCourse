@@ -18,10 +18,20 @@ from django.urls import re_path,path,include
 from django.conf.urls import url
 from django.contrib.staticfiles.views import serve
 from django.views.generic import RedirectView
+from postings import views
 
 urlpatterns = [
     # / routes to index.html
-    url(r'^$', serve, kwargs={'path': 'index.html'}),
+    path('', views.index, name='homepage'),
+
+    # /reviews routes to the endpoint for POSTing new reviews.
+    path('reviews', views.post_review, name='post_review'),
+
+    # /rateables routes to a list of all rateable items: courses and universities.
+    path('rateables', views.rateables, name='rateables'),
+
+    # /rateables/<pk> routes to a specific rateable entity.
+    path('rateables/<int:entity_id>', views.rateable_entity, name='rateable_entity'),
 
     # static files (*.css, *.js, *.jpg etc.) served on /
     # (assuming Django uses /static/ and /media/ for static/media urls)

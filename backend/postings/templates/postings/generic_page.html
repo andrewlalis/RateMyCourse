@@ -1,0 +1,54 @@
+{# This page represents the base template that all others will extend from. #}
+{# It will contain a universal navigation bar, script tags, footers, and other things needed on every page. #}
+
+<!doctype HTML>
+<html lang="en">
+<head>
+	{% load static %}
+	<link rel="icon" href="{% static 'postings/website_icon.png' %}">
+
+	<!-- Required meta tags. -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap Stylesheet -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	<title>
+		{% block title %}RateMyCourse{% endblock %}
+	</title>
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-light bg-light">
+			<a class="navbar-brand" href="/">
+				<img src="{% static 'postings/website_icon.png' %}" width=30 height=30 alt="Website Icon">
+				RateMyCourse
+			</a>
+			<span class="navbar-text">
+				Welcome to this website
+			</span>
+			<form class="form-inline" method="GET" action="/">
+				<select class="form-control mr-sm-2" name="type">
+					<option value="all">Everything</option>
+					<option value="university">Universities</option>
+					<option value="course">Courses</option>
+				</select>
+				<input class="form-control mr-sm-2" name="query" type="search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</nav>
+	</header>
+	{# All of a page's content to display should be placed in here. #}
+	<div id="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+
+	<!-- Javascript dependencies -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

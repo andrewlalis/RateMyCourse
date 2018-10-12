@@ -1,0 +1,101 @@
+{% extends 'postings/frontend/base_page.html' %}
+
+{# Load static tag so that images and custom scripts from /static/ can be used. #}
+{% load static %}
+
+{% block page_title %}
+    RMC - {{ entity.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container entity">
+    <div class="row">
+        <div class="col-sm-6">
+            <h1 class="muted text-center">{{ entity.name }} {{ entity.average }}</h1>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="rating-block" data-rating="{{ entity.average_rating|floatformat:"-2" }}">
+                <h4>Average user rating</h4>
+                <h2 class="bold padding-bottom-7">{{ entity.average_rating|floatformat:"-2" }} <small>/ 5</small></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-7">
+            <hr/>
+            <div id="review_container" class="review-block">
+                <div class="row" style="margin-top:40px;">
+                    <div class="col-md-12">
+                        <div class="well-sm">
+                            <div class="text-right">
+                                <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
+                            </div>
+
+                            {# New Review input form. Hidden by default. #}
+                            <div class="row" id="post-review-box" style="display:none;">
+                                <div class="col-md-12">
+                                    <form method="post" action="/reviews">
+                                        <p class="text-right date"></p>
+
+                                        {# Username input #}
+                                        <div class="form-group">
+                                            <label for="name_input">Name:</label>
+                                            <input type="text" class="form-control" placeholder="Name..." id="name_input">
+                                        </div>
+
+                                        {# Title input #}
+                                        <div class="form-group">
+                                            <label for="title_input">Title:</label>
+                                            <input type="text" class="form-control" placeholder="Title..." id="title_input" name="title" required>
+                                        </div>
+
+                                        {# Content input #}
+                                        <div class="form-group">
+                                            <label for="content_input">Review:</label>
+                                            <textarea class="form-control animated" rows="3" id="content_input" name="content" placeholder="Enter your review here..." required></textarea>
+                                        </div>
+
+                                        <div class="text-right">
+                                            {# Rating input with star boxes. #}
+                                            <div class="stars starrr" data-rating="0"></div>
+                                            
+                                            {# Close the input form with this anchor-link. #}
+                                            <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                                Cancel
+                                            </a>
+
+                                            {# Hidden values that need to be posted with user content. #}
+                                            <input type="hidden"  id="rating_input" name="rating" value="1">
+                                            <div id="csrf-token">{% csrf_token %}</div>
+                                            <input type="hidden" name="entity_id" value="{{ entity.pk }}">
+
+                                            {# Submit the form #}
+                                            <button class="btn btn-success btn-lg" type="submit">Save</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% for review in reviews %}
+                    {% include "postings/frontend/review.html" with review=review only %}
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'postings/js/voting.js' %}"></script>
+{% endblock %}

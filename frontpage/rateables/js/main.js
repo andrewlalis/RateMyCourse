@@ -100,6 +100,7 @@ $(function(){
         d.getFullYear();
     $(".date").append(output);
 
+
     if ($('.fullcontainer .landingpage')[0]) {
         alert("yihaa");
     }else{
@@ -108,5 +109,4 @@ $(function(){
     if ($('.fullcontainer landingpage')[0]) {
         alert("yihaa2");
     }
-
 });

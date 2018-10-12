@@ -1,0 +1,18 @@
+{% extends "postings/generic_page.html" %}
+
+{# Represents a generic collection of entities. #}
+
+{% block content %}
+
+{% block collection_name %}
+{% endblock %}
+
+<ul>
+	{% for entity in entities %}
+		<li>
+			<a href="/rateables/{{ entity.pk }}">{{ entity.name }}</a>
+		</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
