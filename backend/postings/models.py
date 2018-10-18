@@ -74,6 +74,8 @@ class Review(models.Model):
 	last_updated_date = models.DateTimeField(auto_now=True)
 	# A reference to the person who created this review.
 	author = models.ForeignKey('postings.User', on_delete=models.PROTECT, null=True, blank=True)
+	# TEMPORARY: Name of person who gave review.
+	author_name = models.CharField(max_length=64, default='Anonymous')
 
 	# Gets the total number of votes which marked this review as 'helpful'.
 	@property

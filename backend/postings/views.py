@@ -71,6 +71,7 @@ def post_review(request):
 		if form.is_valid():
 			# Only if the request is a POST and the form is valid do we do anything.
 			rating = form.cleaned_data['rating']
+			name = form.cleaned_data['name']
 			title = form.cleaned_data['title']
 			content = form.cleaned_data['content']
 			entity_id = form.cleaned_data['entity_id']

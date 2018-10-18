@@ -7,7 +7,7 @@
         <span class="big-font glyphicon glyphicon-user img-rounded"></span>
 
         {# Username #}
-        <div class="review-block-name"><a href="#">Student</a></div>
+        <div class="review-block-name"><a href="#">{{ review.author_name }}</a></div>
 
         {# Date at which review was posted. #}
         <div class="review-block-date">{{ review.created_date|date:"j M, Y" }}<br/></div>
