@@ -7,18 +7,31 @@
   margin-bottom: 0;
   overflow-y: hidden; }
 
-.fullcontainer {
+.box .fullcontainer {
   display: flex;
   align-items: center;
   height: -webkit-calc(100vh - 50px);
   height: -moz-calc(100vh - 50px);
   height: calc(100vh - 50px); }
 
+.box3 .fullcontainer {
+  display: flex;
+  height: -webkit-calc(100vh - 50px);
+  height: -moz-calc(100vh - 50px);
+  height: calc(100vh - 50px); }
+
 .fullcontainer h1 {
-  font-size: 60px; }
+  font-size: 50px; }
 
 .fullcontainer h3 {
   margin-bottom: 30px; }
+
+.whitebox {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  margin-top: 25px;
+  margin-bottom: 25px; }
 
 .navbar-brand {
   cursor: pointer; }
@@ -39,8 +52,7 @@ body {
   color: #FFF; }
 
 .rating-block {
-  background-color: #FAFAFA;
-  border: 1px solid #EFEFEF;
+  float: right;
   padding: 15px 15px 20px 15px;
   border-radius: 3px; }
 
@@ -55,7 +67,9 @@ body {
   border: 1px solid #EFEFEF;
   padding: 15px;
   border-radius: 3px;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  float: right;
+  width: 100%; }
 
 .review-block-name {
   font-size: 12px;
@@ -86,6 +100,10 @@ body {
   font-size: 24px;
   color: #d17581; }
 
+.selfcenter {
+  margin: 0 auto;
+  float: inherit; }
+
 .hr-line-dashed {
   border-top: 1px dashed #E7EAEC;
   color: #ffffff;
@@ -105,5 +123,11 @@ h2 {
 
 .big-font {
   font-size: 25px; }
+
+.box3 {
+  background: #5850c7 url(https://d20ohkaloyme4g.cloudfront.net/img/hero-illustration-module.png) repeat; }
+
+.box2 {
+  background: #5850c7 url(https://d20ohkaloyme4g.cloudfront.net/img/hero-illustration-module.png) repeat; }
 
 /*# sourceMappingURL=style.css.map */

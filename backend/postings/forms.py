@@ -10,3 +10,5 @@ class EntityReviewForm(forms.Form):
 	content = forms.CharField(widget=forms.Textarea)
 	# The id of the entity for which the review is created.
 	entity_id = forms.IntegerField()
+	# TEMPORARY name for author name.
+	name = forms.CharField(max_length=64, required=False)

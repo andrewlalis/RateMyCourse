@@ -7,17 +7,17 @@
         <span class="big-font glyphicon glyphicon-user img-rounded"></span>
 
         {# Username #}
-        <div class="review-block-name"><a href="#">Student</a></div>
+        <div class="review-block-name"><p class="h5"><a href="#">{{ review.author_name }}</a></p></div>
 
         {# Date at which review was posted. #}
-        <div class="review-block-date">{{ review.created_date|date:"j M, Y" }}<br/></div>
+        <div class="review-block-date"><p class="h5">{{ review.created_date|date:"j M, Y" }}</p><br/></div>
     </div>
     <div class="col-sm-9">
         <div class="review-block-rate" data-rating="{{ review.rating }}">
             <div class="clearfix"></div>
         </div>
-        <div class="review-block-title">{{ review.title }}</div>
-        <div class="review-block-description">{{ review.content }}</div>
+        <div class="review-block-title"> <p class="h3">{{ review.title }}</p></div>
+        <div class="review-block-description"><p class="h4">{{ review.content }}</p></div>
 
         <div id="review-votes-{{ review.pk }}" class="js_votes" data-review_id="{{ review.pk }}">
             <div class="review-vote-buttons">
