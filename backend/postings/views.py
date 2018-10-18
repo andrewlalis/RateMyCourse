@@ -71,10 +71,15 @@ def post_review(request):
 		if form.is_valid():
 			# Only if the request is a POST and the form is valid do we do anything.
 			rating = form.cleaned_data['rating']
-			name = form.cleaned_data['name']
 			title = form.cleaned_data['title']
 			content = form.cleaned_data['content']
 			entity_id = form.cleaned_data['entity_id']
+
+			if 'name' in request.POST:
+				author_name = form.cleaned_data['name']
+			else:
+				author_name = None
+			
 			try:
 				entity = RateableEntity.objects.get(pk=entity_id)
 			except RateableEntity.DoesNotExist:
@@ -83,6 +88,7 @@ def post_review(request):
 			# Creates the new Review object from the posted data.
 			review = Review.objects.create(
 				rating=rating,
+				author_name=author_name,
 				title=title,
 				content=content,
 				rateable_entity=entity
