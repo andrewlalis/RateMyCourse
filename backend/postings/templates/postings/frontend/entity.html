@@ -9,11 +9,13 @@
 
 {% block content %}
 <div class="container entity">
-    <div class="row">
-        <div class="col-sm-6">
-            <h1 class="muted text-center">{{ entity.name }} {{ entity.average }}</h1>
+    {% block entity_info %}
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="muted text-center">{{ entity.name }}</h1>
+            </div>
         </div>
-    </div>
+    {% endblock %}
     <hr>
     <div class="row">
         <div class="col-sm-3">
@@ -21,6 +23,16 @@
                 <h4>Average user rating</h4>
                 <h2 class="bold padding-bottom-7">{{ entity.average_rating|floatformat:"-2" }} <small>/ 5</small></h2>
             </div>
+        </div>
+        {# Rating Distribution Display #}
+        <div class="col-sm-3">
+            <ul>
+                <li>5: {{ entity.rating_distribution.4 }}</li>
+                <li>4: {{ entity.rating_distribution.3 }}</li>
+                <li>3: {{ entity.rating_distribution.2 }}</li>
+                <li>2: {{ entity.rating_distribution.1 }}</li>
+                <li>1: {{ entity.rating_distribution.0 }}</li>
+            </ul>
         </div>
     </div>
 

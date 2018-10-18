@@ -49,6 +49,8 @@ def rateable_entity(request, entity_id):
 		# Set any auxiliary variables needed, like average rating.
 		# This MUST be done after categorizing the object above.
 		entity.average_rating = entity.getAverageRating()
+		entity.rating_distribution = entity.getRatingDistribution()
+		print(entity.rating_distribution)
 	except RateableEntity.DoesNotExist:
 		raise Http404("RateableEntity with id " + str(entity_id) + " does not exist.")
 

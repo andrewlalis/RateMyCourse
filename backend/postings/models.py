@@ -40,6 +40,14 @@ class RateableEntity(models.Model):
 			return None
 		return rating_sum / reviews.count()
 
+	# Gets a 5-item list of the count of each rating.
+	def getRatingDistribution(self):
+		reviews = self.review_set.select_related()
+		distribution = [0, 0, 0, 0, 0]
+		for review in reviews:
+			distribution[review.rating-1] += 1
+		return distribution
+
 	# Simply returns the name as the string representation.
 	def __str__(self):
 		return self.name
