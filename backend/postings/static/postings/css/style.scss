@@ -15,6 +15,7 @@
   height: -moz-calc(100vh - 50px);
   height: calc(100vh - 50px);
 }
+
 .box3 .fullcontainer {
   display: flex;
   height: -webkit-calc(100vh - 50px);
@@ -33,6 +34,7 @@
   border-radius: 15px;
   padding: 30px;
   margin-top:25px;
+  margin-bottom:25px;
 }
 
 
@@ -59,8 +61,7 @@ body {
   color:#FFF;
 }
 .rating-block{
-  background-color:#FAFAFA;
-  border:1px solid #EFEFEF;
+  float:right;
   padding:15px 15px 20px 15px;
   border-radius:3px;
 }
@@ -77,6 +78,7 @@ body {
   padding:15px;
   border-radius:3px;
   margin-bottom:15px;
+  float: right;
 }
 .review-block-name{
   font-size:12px;
@@ -115,6 +117,11 @@ body {
 
 }
 
+.selfcenter{
+  margin: 0 auto;
+  float: inherit;
+}
+
 .hr-line-dashed {
   border-top: 1px dashed #E7EAEC;
   color: #ffffff;
@@ -140,5 +147,8 @@ h2 {
 }
 
 .box3{
+  background: #5850c7 url(https://d20ohkaloyme4g.cloudfront.net/img/hero-illustration-module.png) repeat;
+}
+.box2{
   background: #5850c7 url(https://d20ohkaloyme4g.cloudfront.net/img/hero-illustration-module.png) repeat;
 }
