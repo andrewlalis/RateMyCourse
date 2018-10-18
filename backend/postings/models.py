@@ -44,23 +44,21 @@ class RateableEntity(models.Model):
 	def getRatingDistribution(self):
 		reviews = self.review_set.select_related()
 		distribution = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
-		review_count = len(reviews)
+		review_count = reviews.count()
 		
 		for review in reviews:
 			distribution[review.rating-1][0] += 1
 
-		max_val = 0
-		for rating_dist in distribution:
-			rating_dist[1] = (rating_dist[0] / review_count) * 100
-			if (rating_dist[1] > max_val):
-				max_val = rating_dist[1]
+		if (review_count > 0):
+			max_val = 0
+			for rating_dist in distribution:
+				rating_dist[1] = (rating_dist[0] / review_count) * 100
+				if (rating_dist[1] > max_val):
+					max_val = rating_dist[1]
 
-		print(max_val)
-		print(distribution)
-		for rating_dist in distribution:
-			rating_dist[1] = (rating_dist[1] / max_val) * 100
+			for rating_dist in distribution:
+				rating_dist[1] = (rating_dist[1] / max_val) * 100
 
-		print(distribution)
 		return distribution
 
 	# Simply returns the name as the string representation.
