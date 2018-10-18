@@ -20,14 +20,14 @@
     {% endblock %}
     <hr>
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-6">
             <div class="rating-block" data-rating="{{ entity.average_rating|floatformat:"-2" }}">
                 <h2>Average user rating</h2>
                 <h2 class="bold padding-bottom-7">{{ entity.average_rating|floatformat:"-2" }} <small>/ 5</small></h2>
             </div>
         </div>
         {# Rating Distribution Display #}
-        <div class="col-sm-5">
+        <div class="col-sm-6">
             <h4>Rating breakdown</h4>
             <div class="pull-left">
                 <div class="pull-left" style="width:35px; line-height:1;">
