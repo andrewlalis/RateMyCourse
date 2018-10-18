@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="container entity">
     {% block entity_info %}
         <div class="row">
@@ -114,6 +115,7 @@
                             <div class="row" id="post-review-box" style="display:none;">
                                 <div class="col-md-12">
                                     <form method="post" action="/reviews">
+                                        <div id="csrf-token">{% csrf_token %}</div>
                                         <p class="text-right date"></p>
 
                                         {# Username input #}
@@ -146,7 +148,6 @@
 
                                             {# Hidden values that need to be posted with user content. #}
                                             <input type="hidden"  id="rating_input" name="rating" value="1">
-                                            <div id="csrf-token">{% csrf_token %}</div>
                                             <input type="hidden" name="entity_id" value="{{ entity.pk }}">
 
                                             {# Submit the form #}
