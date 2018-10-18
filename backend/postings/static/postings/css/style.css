@@ -68,7 +68,8 @@ body {
   padding: 15px;
   border-radius: 3px;
   margin-bottom: 15px;
-  float: right; }
+  float: right;
+  width: 100%; }
 
 .review-block-name {
   font-size: 12px;

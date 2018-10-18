@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-
+<div class="fullcontainer container bootstrap snippet results">
     <div class="row">
         <div class="col-lg-12 whitebox">
             <div class="ibox float-e-margins ">
@@ -32,7 +32,7 @@
                         {% for entity in results %}
                             <div class="hr-line-dashed"></div>
                             <div class="search-result">
-                                <h3><a href="/rateables/{{ entity.pk }}">{{ entity.name }}</a></h3>
+                                <h2><a href="/rateables/{{ entity.pk }}">{{ entity.name }}</a></h2>
                                 <h4> Reviews: {{entity.review_set.all|length}}</h4>
                                 <span class="toright glyphicon glyphicon-icon-comments"></span>
 
