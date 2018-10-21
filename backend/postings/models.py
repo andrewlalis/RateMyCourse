@@ -40,6 +40,27 @@ class RateableEntity(models.Model):
 			return None
 		return rating_sum / reviews.count()
 
+	# Gets a 5-item list of the count of each rating, and the percentage of total votes.
+	def getRatingDistribution(self):
+		reviews = self.review_set.select_related()
+		distribution = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
+		review_count = reviews.count()
+		
+		for review in reviews:
+			distribution[review.rating-1][0] += 1
+
+		if (review_count > 0):
+			max_val = 0
+			for rating_dist in distribution:
+				rating_dist[1] = (rating_dist[0] / review_count) * 100
+				if (rating_dist[1] > max_val):
+					max_val = rating_dist[1]
+
+			for rating_dist in distribution:
+				rating_dist[1] = (rating_dist[1] / max_val) * 100
+
+		return distribution
+
 	# Simply returns the name as the string representation.
 	def __str__(self):
 		return self.name
@@ -66,6 +87,8 @@ class Review(models.Model):
 	last_updated_date = models.DateTimeField(auto_now=True)
 	# A reference to the person who created this review.
 	author = models.ForeignKey('postings.User', on_delete=models.PROTECT, null=True, blank=True)
+	# TEMPORARY: Name of person who gave review.
+	author_name = models.CharField(max_length=64, default='Anonymous')
 
 	# Gets the total number of votes which marked this review as 'helpful'.
 	@property

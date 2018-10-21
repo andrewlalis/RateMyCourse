@@ -49,6 +49,7 @@ def rateable_entity(request, entity_id):
 		# Set any auxiliary variables needed, like average rating.
 		# This MUST be done after categorizing the object above.
 		entity.average_rating = entity.getAverageRating()
+		entity.rating_distribution = entity.getRatingDistribution()
 	except RateableEntity.DoesNotExist:
 		raise Http404("RateableEntity with id " + str(entity_id) + " does not exist.")
 
@@ -72,6 +73,12 @@ def post_review(request):
 			title = form.cleaned_data['title']
 			content = form.cleaned_data['content']
 			entity_id = form.cleaned_data['entity_id']
+
+			if 'name' in request.POST:
+				author_name = form.cleaned_data['name']
+			else:
+				author_name = None
+			
 			try:
 				entity = RateableEntity.objects.get(pk=entity_id)
 			except RateableEntity.DoesNotExist:
@@ -80,6 +87,7 @@ def post_review(request):
 			# Creates the new Review object from the posted data.
 			review = Review.objects.create(
 				rating=rating,
+				author_name=author_name,
 				title=title,
 				content=content,
 				rateable_entity=entity

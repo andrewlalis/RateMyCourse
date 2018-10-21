@@ -65,7 +65,7 @@ $(function(){
         });
 
         ///Set the stars for the average
-        if(i>avg){
+        if((isNaN(parseFloat(avg)))||i>avg){
             $(".rating-block").append("<button value=" + i +  " id = \"star" + i +"\" type=\"button\" class=\"btn btn-default btn-grey btn-sm\" aria-label=\"Left Align\">\n" +
                 "                    <span class=\"glyphicon glyphicon-star\" aria-hidden=\"true\"></span>\n" +
                 "                </button>");
